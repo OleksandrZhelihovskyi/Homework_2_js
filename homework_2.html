@@ -18,41 +18,41 @@
         }
 
         function BlockedTask(id, title, description) {
-            this.__proto__ = new Task(id, title, description);
-            this.toString = function () {
-                return "BLOCKED:" + this.__proto__.toString()
+            this.prototype = new Task(id, title, description);
+            this.toString = () => {
+                return "BLOCKED:" + this.prototype.toString()
             }
         }
 
         function DeadlineTask(id, title, description, deadline) {
-            this.__proto__ = new Task(id, title, description);
+            this.prototype = new Task(id, title, description);
             this.deadline = new Date();
-            this.toString = function () {
+            this.toString = () => {
                 if (this.deadline.getTime() < deadline.getTime())
-                    return this.__proto__.toString() + ` - ${this.deadline}`
-                else return this.__proto__.toString() + ` - ${this.deadline} - DEADLINE PASSED`
+                    return this.prototype.toString() + ` - ${this.deadline}`
+                else return this.prototype.toString() + ` - ${this.deadline} - DEADLINE PASSED`
             }
         }
 
-        function TaskPrinter(Task) {
-            this.print = function () {
-                Task.forEach(function (element) {
+        function TaskPrinter(task) {
+            this.print = () => {
+                task.forEach(function (element) {
                     console.log(element.toString());
                 });
             }
         }
 
-        let deadline = new Date("December 17, 2021 03:24:00");
+        let deadline = new Date("December 17, 2020 03:24:00");
         const task1 = new Task(1, 'first', 'this is the first one');
         const task2 = new DeadlineTask(2, 'second', 'this is the deadline task', deadline);
         const task3 = new BlockedTask(3, 'third', 'this is the blocked one');
-        const Tasks = [];
-        Tasks.push(task1);
-        Tasks.push(task2);
-        Tasks.push(task3);
-        const Printer = new TaskPrinter(Tasks);
+        const tasks = [];
+        tasks.push(task1);
+        tasks.push(task2);
+        tasks.push(task3);
+        const printer = new TaskPrinter(tasks);
 
-        Printer.print();
+        printer.print();
 
     </script>
 </body>
