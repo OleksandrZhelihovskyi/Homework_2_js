@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Homework_3</title>
+</head>
+
+<body>
+    <script>
+        function myArray(array) {
+            this.__proto__ = Array();
+            this.closest = function (number) {
+                let newArray = []
+                array.forEach(element => {
+                    newArray.push(Math.abs(element - number))
+
+                });
+
+                return newArray.indexOf(Math.min(...newArray))
+            }
+        }
+        const array = [1, 2, 3, 5, 8, 13, 21, 34];
+        const MyArray = new myArray(array);
+        console.log(MyArray.closest(5)) // 3
+        console.log(MyArray.closest(10)) // 4
+        console.log(MyArray.closest(100500)) // 7
+        console.log(MyArray.closest(-1)) // 0 
+    </script>
+</body>
+
+</html>
